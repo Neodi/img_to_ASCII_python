@@ -1,9 +1,10 @@
 import numpy as np
 from numpy.typing import NDArray
 from PIL import Image
+from constants import MAX_WIDTH
 
 
-def load_and_resize_image(image_path, max_width=100):
+def load_and_resize_image(image_path, max_width=MAX_WIDTH):
     """
     Load an image from the given path and resize it while maintaining aspect ratio,
     then adjust the height to half for better ASCII representation.

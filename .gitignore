@@ -2,6 +2,7 @@
 *.jpeg
 *.png
 !sira.jpg
+!hue_clock.jpg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
