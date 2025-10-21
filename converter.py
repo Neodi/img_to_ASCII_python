@@ -1,5 +1,29 @@
 import numpy as np
 from numpy.typing import NDArray
+from PIL import Image
+
+
+def load_and_resize_image(image_path, max_width=100):
+    """
+    Load an image from the given path and resize it while maintaining aspect ratio,
+    then adjust the height to half for better ASCII representation.
+    """
+    img = Image.open(image_path)
+
+    def resize_image_maintain_aspect(img, max_width):
+        """
+        Resize image to a maximum width while maintaining aspect ratio.
+        """
+        width, height = img.size
+        aspect_ratio = height / width
+        new_width = min(width, max_width)
+        new_height = int(new_width * aspect_ratio)
+        return img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+
+    img = resize_image_maintain_aspect(img, max_width)
+    width, height = img.size
+    img = img.resize((width, height // 2), Image.Resampling.LANCZOS)
+    return np.asarray(img)
 
 
 def rgb_to_hsv(img_array: NDArray[np.uint8]) -> NDArray[np.float64]:
