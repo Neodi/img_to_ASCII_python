@@ -11,30 +11,20 @@ def rgb_to_hsv(img_array: NDArray[np.uint8]) -> NDArray[np.float64]:
 
     # Normalizar los valores
     normalized_img = img_array / 255
-    print("Normalized img: ", normalized_img[0][0])
 
     # Máximo, mínimo y diferencia para cada píxel
     cmax = np.max(normalized_img, axis=2)
     cmin = np.min(normalized_img, axis=2)
 
-    print("Cmax value [0][0]: ", cmax[0][0])
-    print("Cmin value [0][0]: ", cmin[0][0])
-
     diff = cmax - cmin
-    print("Diff value [0][0]: ", diff[0][0])
-    print("Diff array: ", diff.shape)
 
     # Calcular hue
     hue_array = hue_calculation(
         diff_array=diff, cmax_array=cmax, cmin_array=cmin, rgb_array=normalized_img
     )
-    print("hue_array.shape", hue_array.shape)
-    print("hue_array[0][0]", hue_array[0][0])
 
     # Calcular saturation
     saturation_array = saturation_calculation(diff_array=diff, cmax_array=cmax)
-    print("saturation_array.shape", saturation_array.shape)
-    print("saturation_array.[0][0]", saturation_array[0][0])
 
     # Calcular Value
     value_array = cmax * 100
@@ -64,9 +54,6 @@ def hue_calculation(
     mask_red = (diff_array != 0) & (cmax_array == rgb_array[:, :, 0])
     mask_green = (diff_array != 0) & (cmax_array == rgb_array[:, :, 1])
     mask_blue = (diff_array != 0) & (cmax_array == rgb_array[:, :, 2])
-
-    print("diff_array.shape", diff_array.shape)
-    print("diff_array[mask_red].shape", diff_array[mask_red].shape)
 
     # aplicar mascaras y calcular
     hue_array[mask_red] = (
