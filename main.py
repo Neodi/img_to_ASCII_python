@@ -20,7 +20,7 @@ colorama.init()
 if len(sys.argv) > 1:
     img_path = sys.argv[1]
 else:
-    img_path = "sira.jpg"  # Imagen por defecto
+    img_path = "doc_images/sira.jpg"  # Imagen por defecto
 
 np_image = load_and_resize_image(img_path)
 
@@ -74,6 +74,6 @@ print()
 
 # Color con bordes
 ascii_image_borders_and_colours = borders_and_colours(
-    hsv_image_array=hsv_image_array,
+    hsv_image_array=hsv_image_array, border_percentile=95
 )
 print(ascii_image_borders_and_colours)
